@@ -27,12 +27,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'My Collections',
+          'Pokemon Gallery',
+          style: TextStyle(color: Color.fromARGB(255, 219, 211, 157)),
         ),
+        backgroundColor: const Color.fromARGB(255, 78, 67, 33),
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Icon(Icons.search),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.brightness_2),
           ),
         ],
         elevation: 4,

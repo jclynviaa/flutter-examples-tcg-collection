@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Card Collections',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: const ColorScheme.dark(),
+        colorScheme: const ColorScheme.light(),
         useMaterial3: true,
       ),
       home: const HomeScreen(),

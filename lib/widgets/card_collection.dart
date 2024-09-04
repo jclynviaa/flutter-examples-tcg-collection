@@ -15,7 +15,7 @@ class CardCollection extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 0.8,
+        childAspectRatio: 0.7,
         crossAxisCount: 2,
       ),
       itemCount: pokemonCards.length,
