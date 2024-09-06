@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import '../models/pokemon_card.dart';
 
 class CheckBox extends StatefulWidget {
-  const CheckBox({super.key, required this.pokemon});
+  const CheckBox(
+      {super.key, required this.pokemon, required this.updateCheckedCards});
 
   final PokemonCard pokemon;
+  final Function(PokemonCard) updateCheckedCards;
 
   @override
   State<CheckBox> createState() => _CheckBoxState();
@@ -18,6 +20,7 @@ class _CheckBoxState extends State<CheckBox> {
       onTap: () {
         setState(() {
           widget.pokemon.toggleIsChecked();
+          widget.updateCheckedCards(widget.pokemon);
         });
       },
       child: Container(

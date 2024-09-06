@@ -15,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<PokemonCard>> pokemonCards;
+  List<PokemonCard> checkedCards = [];
 
   @override
   void initState() {
@@ -22,6 +23,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // Read and parse JSON that contains the card list
     pokemonCards = fetchPokemonData();
+  }
+
+  void updatedCheckedCards(PokemonCard card) {
+    setState(() {
+      if (card.isChecked) {
+        checkedCards.add(card);
+      } else {
+        checkedCards.remove(card);
+      }
+    });
+  }
+
+  void showCheckedCards() {
+    if (checkedCards.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          content: Text("You haven't checked any card"),
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: checkedCards.map((card) {
+              return Text(card.name);
+            }).toList(),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -36,7 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.search),
+            child: IconButton(
+              icon: const Icon(Icons.check_circle),
+              onPressed: showCheckedCards,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(right: 8.0),
@@ -63,7 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Text('An error has occurred!'),
                 );
               } else if (snapshot.hasData) {
-                return CardCollection(pokemonCards: snapshot.data!);
+                return CardCollection(
+                  pokemonCards: snapshot.data!,
+                  updateCheckedCards: updatedCheckedCards,
+                );
               } else {
                 return const Center(
                   child: CircularProgressIndicator(),

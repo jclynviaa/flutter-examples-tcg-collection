@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import '../models/pokemon_card.dart';
 import 'card_item.dart';
 
 class CardCollection extends StatelessWidget {
   final List<PokemonCard> pokemonCards;
+  final Function(PokemonCard) updateCheckedCards;
 
   const CardCollection({
     super.key,
     required this.pokemonCards,
+    required this.updateCheckedCards,
   });
 
   @override
@@ -20,7 +23,10 @@ class CardCollection extends StatelessWidget {
       ),
       itemCount: pokemonCards.length,
       itemBuilder: (context, index) {
-        return CardItem(pokemon: pokemonCards[index]);
+        return CardItem(
+          pokemon: pokemonCards[index],
+          updateCheckedCards: updateCheckedCards,
+        );
       },
     );
   }

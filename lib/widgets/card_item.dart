@@ -7,15 +7,20 @@ import '../widgets/custom_image_network.dart';
 
 class CardItem extends StatelessWidget {
   final PokemonCard pokemon;
+  final Function(PokemonCard) updateCheckedCards;
 
-  const CardItem({super.key, required this.pokemon});
+  const CardItem(
+      {super.key, required this.pokemon, required this.updateCheckedCards});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridTile(
-        header: CheckBox(pokemon: pokemon),
+        header: CheckBox(
+          pokemon: pokemon,
+          updateCheckedCards: updateCheckedCards,
+        ),
         child: GestureDetector(
           onTap: () {
             Navigator.push(
