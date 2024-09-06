@@ -5,7 +5,9 @@ import '../utils.dart';
 import '../widgets/card_collection.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final VoidCallback toggleTheme;
+
+  const HomeScreen({super.key, required this.toggleTheme});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -28,17 +30,24 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text(
           'Pokemon Gallery',
-          style: TextStyle(color: Color.fromARGB(255, 219, 211, 157)),
+          style: TextStyle(color: Color.fromARGB(255, 90, 79, 8)),
         ),
-        backgroundColor: const Color.fromARGB(255, 78, 67, 33),
-        actions: const [
+        backgroundColor: const Color.fromARGB(255, 204, 167, 65),
+        actions: [
           Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Icon(Icons.search),
           ),
           Padding(
             padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.brightness_2),
+            child: IconButton(
+              icon: Icon(
+                Theme.of(context).brightness == Brightness.dark
+                    ? Icons.wb_sunny
+                    : Icons.brightness_2,
+              ),
+              onPressed: widget.toggleTheme,
+            ),
           ),
         ],
         elevation: 4,
